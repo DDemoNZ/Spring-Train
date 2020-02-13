@@ -2,7 +2,6 @@ package spring.dao.impl;
 
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
