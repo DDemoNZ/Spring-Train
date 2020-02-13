@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import spring.dao.impl.UserDaoImpl;
+import spring.dao.UserDao;
 import spring.model.User;
 import spring.service.UserService;
 
@@ -13,15 +13,15 @@ import spring.service.UserService;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDaoImpl userDaoImpl;
+    private UserDao userDao;
 
     @Override
     public void add(User user) {
-        userDaoImpl.add(user);
+        userDao.add(user);
     }
 
     @Override
     public List<User> listUsers() {
-        return userDaoImpl.listUsers();
+        return userDao.listUsers();
     }
 }
