@@ -40,7 +40,6 @@ public class UserDaoImpl implements UserDao {
         try (Session session = sessionFactory.openSession()) {
             CriteriaQuery<User> criteriaQuery =
                     session.getCriteriaBuilder().createQuery(User.class);
-            Root<User> userRoot = criteriaQuery.from(User.class);
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Can't get list of users");
