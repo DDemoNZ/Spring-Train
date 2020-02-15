@@ -2,7 +2,6 @@ package spring.dao.impl;
 
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,6 +39,7 @@ public class UserDaoImpl implements UserDao {
         try (Session session = sessionFactory.openSession()) {
             CriteriaQuery<User> criteriaQuery =
                     session.getCriteriaBuilder().createQuery(User.class);
+            criteriaQuery.from(User.class);
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Can't get list of users");
