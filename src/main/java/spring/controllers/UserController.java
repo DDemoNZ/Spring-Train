@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import spring.UserResponseDto;
 import spring.model.User;
@@ -22,7 +21,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/inject")
-    public ModelAndView injectUsers() {
+    public String injectUsers() {
         User first = new User();
         first.setUsername("First");
         userService.add(first);
@@ -39,14 +38,13 @@ public class UserController {
         fourth.setUsername("Fourth");
         userService.add(fourth);
 
-        return new ModelAndView("redirect:/user/");
+        return "Success";
     }
 
     @GetMapping("/get/{user_id}")
     public UserResponseDto get(@PathVariable(name = "user_id") Long userId) {
         UserResponseDto userResponseDto = new UserResponseDto();
         User userById = userService.getUserById(userId);
-        userResponseDto.setId(userById.getId());
         userResponseDto.setUsername(userById.getUsername());
         return userResponseDto;
     }
@@ -55,8 +53,7 @@ public class UserController {
     public List<UserResponseDto> getAll() {
         List<UserResponseDto> userResponseDtoList = new ArrayList<>();
         userService.listUsers()
-                .forEach(user -> userResponseDtoList.add(new UserResponseDto(user.getId(),
-                        user.getUsername())));
+                .forEach(user -> userResponseDtoList.add(new UserResponseDto(user.getUsername())));
         return userResponseDtoList;
     }
 }
